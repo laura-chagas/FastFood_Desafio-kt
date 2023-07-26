@@ -60,6 +60,7 @@ class Menus {
             } catch (e: NumberFormatException) {
                 e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
+                menuLanches()
             }
 
         } while (dec != 1 && dec != 2)
@@ -95,6 +96,7 @@ class Menus {
             } catch (e: NumberFormatException) {
                 e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
+                menuBebidas()
             }
 
         } while (dec != 1 && dec != 2)
