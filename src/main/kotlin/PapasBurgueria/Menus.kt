@@ -3,6 +3,7 @@ package PapasBurgueria
 import kotlin.NumberFormatException
 
 class Menus {
+    val papasBurgueria = PapasBurgueriaClass()
     fun menuInicial() {
         var dec = 0
         println("---------BEM VINDO---------")
@@ -44,13 +45,13 @@ class Menus {
                     1 -> {
                         println("Quantos X-burgueres você deseja? ")
                         val qtdxburguer = readln().toInt()
-                        criarXburguer(qtdxburguer)
+                        papasBurgueria.criarXburguer(qtdxburguer)
                     }
 
                     2 -> {
                         println("Quantos X-saladas você deseja? ")
                         val qtdXsalada = readln().toInt()
-                        criarXsalada(qtdXsalada)
+                        papasBurgueria.criarXsalada(qtdXsalada)
                     }
 
                     else -> {
@@ -65,7 +66,7 @@ class Menus {
 
         } while (dec != 1 && dec != 2)
 
-        totalCarrinho()
+        papasBurgueria.totalCarrinho()
         decisaoFinal()
     }
 
@@ -80,13 +81,13 @@ class Menus {
                     1 -> {
                         println("Quantos Refrigerantes você deseja? ")
                         val qtdRefri = readln().toInt()
-                        criarRefrigerante(qtdRefri)
+                        papasBurgueria.criarRefrigerante(qtdRefri)
                     }
 
                     2 -> {
                         println("Quantos Sucos você deseja? ")
                         val qtdSuco = readln().toInt()
-                        criarSuco(qtdSuco)
+                        papasBurgueria.criarSuco(qtdSuco)
                     }
 
                     else -> {
@@ -100,7 +101,7 @@ class Menus {
             }
 
         } while (dec != 1 && dec != 2)
-        totalCarrinho()
+        papasBurgueria.totalCarrinho()
         decisaoFinal()
     }
 
@@ -126,7 +127,7 @@ class Menus {
 
                     4 -> {
                         Thread.sleep(2000)
-                        totalCarrinho()
+                        papasBurgueria.totalCarrinho()
                         finalizarPedido()
                     }
                 }
@@ -153,34 +154,34 @@ class Menus {
                     100 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarXburguer(receberquantidade)
-                        totalCarrinho()
+                        papasBurgueria.criarXburguer(receberquantidade)
 
                     }
 
                     200 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarXsalada(receberquantidade)
+                        papasBurgueria.criarXsalada(receberquantidade)
+
                     }
 
                     300 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarRefrigerante(receberquantidade)
+                        papasBurgueria.criarRefrigerante(receberquantidade)
                     }
 
                     400 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarSuco(receberquantidade)
+                        papasBurgueria.criarSuco(receberquantidade)
                     }
 
                     else -> {
                         println("Opção inválida...\n")
                     }
                 }
-                totalCarrinho()
+                papasBurgueria.totalCarrinho()
                 decisaoFinal()
 
             } catch (e: NumberFormatException) {
@@ -204,8 +205,8 @@ class Menus {
                     100 -> {
                         if (carrinho.contains(newXburguer)) {
                             println("X-BURGUER REMOVIDO COM SUCESSO :P\n")
-                            removerXburguer()
-                            totalCarrinho()
+                            papasBurgueria.removerXburguer()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -215,8 +216,8 @@ class Menus {
                     200 -> {
                         if (carrinho.contains(newXsalada)) {
                             println("X-SALADA REMOVIDO COM SUCESSO :P\n")
-                            removerXsalada()
-                            totalCarrinho()
+                            papasBurgueria.removerXsalada()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -226,8 +227,8 @@ class Menus {
                     300 -> {
                         if (carrinho.contains(newRefri)) {
                             println("REFRIGERANTE REMOVIDO COM SUCESSO :P\n")
-                            removerRefrigerante()
-                            totalCarrinho()
+                            papasBurgueria.removerRefrigerante()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -237,8 +238,8 @@ class Menus {
                     400 -> {
                         if (carrinho.contains(newSuco)) {
                             println("SUCO REMOVIDO COM SUCESSO :P\n")
-                            removerSuco()
-                            totalCarrinho()
+                            papasBurgueria.removerSuco()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -269,7 +270,7 @@ class Menus {
                     println("Opção inválida, tente novamente")
                     finalizarPedido()
                 }
-                pagarCompra(formaDePagar)
+                papasBurgueria.pagarCompra(formaDePagar)
                 println()
                 Thread.sleep(5000)
                 menuInicial()
