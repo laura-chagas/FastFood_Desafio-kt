@@ -94,11 +94,11 @@ fun pagarCompra(formaPagamento: Int){
         }
         4 -> {
             println("Qual valor (em nota) será pago? ")
-            val pagamento = readln().toInt()
+            val pagamento = readln().toDouble()
             if (pagamento > total){
               val troco =  pagamento - total
                 println("Compra finalizada com sucesso! Boa refeição! ")
-                println("Seu troco: $troco")
+                println("Seu troco: R$%.2f".format(troco))
             }else {
                 println("Compra finalizada com sucesso! Boa refeição! ")
             }
