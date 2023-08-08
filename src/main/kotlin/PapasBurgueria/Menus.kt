@@ -3,6 +3,11 @@ package PapasBurgueria
 import kotlin.NumberFormatException
 
 class Menus {
+    val papasBurgueria = PapasBurgueriaClass()
+    val comprarProdutos = Compra()
+    val removerProdutos = Remocao()
+    val receberPagamento = Pagamento()
+
     fun menuInicial() {
         var dec = 0
         println("---------BEM VINDO---------")
@@ -25,7 +30,6 @@ class Menus {
                     }
                 }
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
             }
 
@@ -44,13 +48,13 @@ class Menus {
                     1 -> {
                         println("Quantos X-burgueres você deseja? ")
                         val qtdxburguer = readln().toInt()
-                        criarXburguer(qtdxburguer)
+                        comprarProdutos.criarXburguer(qtdxburguer)
                     }
 
                     2 -> {
                         println("Quantos X-saladas você deseja? ")
                         val qtdXsalada = readln().toInt()
-                        criarXsalada(qtdXsalada)
+                        comprarProdutos.criarXsalada(qtdXsalada)
                     }
 
                     else -> {
@@ -58,15 +62,14 @@ class Menus {
                     }
                 }
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
                 menuLanches()
             }
 
         } while (dec != 1 && dec != 2)
 
-        totalCarrinho()
-        decisaoFinal()
+        papasBurgueria.totalCarrinho()
+        menuDecisaoFinal()
     }
 
     private fun menuBebidas() {
@@ -80,13 +83,13 @@ class Menus {
                     1 -> {
                         println("Quantos Refrigerantes você deseja? ")
                         val qtdRefri = readln().toInt()
-                        criarRefrigerante(qtdRefri)
+                        comprarProdutos.criarRefrigerante(qtdRefri)
                     }
 
                     2 -> {
                         println("Quantos Sucos você deseja? ")
                         val qtdSuco = readln().toInt()
-                        criarSuco(qtdSuco)
+                        comprarProdutos.criarSuco(qtdSuco)
                     }
 
                     else -> {
@@ -94,17 +97,16 @@ class Menus {
                     }
                 }
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
                 menuBebidas()
             }
 
         } while (dec != 1 && dec != 2)
-        totalCarrinho()
-        decisaoFinal()
+        papasBurgueria.totalCarrinho()
+        menuDecisaoFinal()
     }
 
-    private fun decisaoFinal() {
+    private fun menuDecisaoFinal() {
         var dec = 0
         do {
             try {
@@ -117,22 +119,21 @@ class Menus {
                     }
 
                     2 -> {
-                        editarItem()
+                        menuParaEditarItem()
                     }
 
                     3 -> {
-                        removerItem()
+                        menuParaRemoverItem()
                     }
 
                     4 -> {
                         Thread.sleep(2000)
-                        totalCarrinho()
-                        finalizarPedido()
+                        papasBurgueria.totalCarrinho()
+                        menuParaFinalizarPedido()
                     }
                 }
 
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
             }
 
@@ -140,7 +141,7 @@ class Menus {
 
     }
 
-    private fun editarItem() {
+    private fun menuParaEditarItem() {
         println("---------------------------Códigos---------------------------")
         println("[100] X-burguer  [200] X-Salada  [300] Refrigerantes    [400] Sucos\n")
         print("Por favor, digite o código do item o qual você deseja editar: ")
@@ -153,45 +154,43 @@ class Menus {
                     100 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarXburguer(receberquantidade)
-                        totalCarrinho()
-
+                        comprarProdutos.criarXburguer(receberquantidade)
                     }
 
                     200 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarXsalada(receberquantidade)
+                        comprarProdutos.criarXsalada(receberquantidade)
+
                     }
 
                     300 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarRefrigerante(receberquantidade)
+                        comprarProdutos.criarRefrigerante(receberquantidade)
                     }
 
                     400 -> {
                         print("Agora me diga quantos itens você deseja adicionar: ")
                         val receberquantidade = readln().toInt()
-                        criarSuco(receberquantidade)
+                        comprarProdutos.criarSuco(receberquantidade)
                     }
 
                     else -> {
                         println("Opção inválida...\n")
                     }
                 }
-                totalCarrinho()
-                decisaoFinal()
+                papasBurgueria.totalCarrinho()
+                menuDecisaoFinal()
 
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
             }
 
         }while (dec != 100 && dec != 200 && dec != 300 && dec != 400)
     }
 
-    private fun removerItem() {
+    private fun menuParaRemoverItem() {
         println("---------------------------Códigos---------------------------")
         println("[100] X-burguer  [200] X-Salada  [300] Refrigerantes    [400] Sucos\n")
         print("Por favor, digite o código do item o qual você deseja remover: ")
@@ -204,8 +203,8 @@ class Menus {
                     100 -> {
                         if (carrinho.contains(newXburguer)) {
                             println("X-BURGUER REMOVIDO COM SUCESSO :P\n")
-                            removerXburguer()
-                            totalCarrinho()
+                            removerProdutos.removerXburguer()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -215,8 +214,8 @@ class Menus {
                     200 -> {
                         if (carrinho.contains(newXsalada)) {
                             println("X-SALADA REMOVIDO COM SUCESSO :P\n")
-                            removerXsalada()
-                            totalCarrinho()
+                            removerProdutos.removerXsalada()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -226,8 +225,8 @@ class Menus {
                     300 -> {
                         if (carrinho.contains(newRefri)) {
                             println("REFRIGERANTE REMOVIDO COM SUCESSO :P\n")
-                            removerRefrigerante()
-                            totalCarrinho()
+                            removerProdutos.removerRefrigerante()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -237,8 +236,8 @@ class Menus {
                     400 -> {
                         if (carrinho.contains(newSuco)) {
                             println("SUCO REMOVIDO COM SUCESSO :P\n")
-                            removerSuco()
-                            totalCarrinho()
+                            removerProdutos.removerSuco()
+                            papasBurgueria.totalCarrinho()
 
                         } else {
                             println("Ops, esse item não está no carrinho...\n")
@@ -249,16 +248,15 @@ class Menus {
                         println("Opção inválida...\n")
                     }
                 }
-                decisaoFinal()
+                menuDecisaoFinal()
 
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
             }
         } while (dec != 100 && dec != 200 && dec != 300 && dec != 400)
     }
 
-    private fun finalizarPedido() {
+    private fun menuParaFinalizarPedido() {
         var dec = 0
         do {
             try {
@@ -267,20 +265,19 @@ class Menus {
 
                 while (!(formaDePagar == 1 || formaDePagar == 2 || formaDePagar == 3 || formaDePagar == 4)) {
                     println("Opção inválida, tente novamente")
-                    finalizarPedido()
+                    menuParaFinalizarPedido()
                 }
-                pagarCompra(formaDePagar)
+                receberPagamento.pagarCompra(formaDePagar)
                 println()
                 Thread.sleep(5000)
                 menuInicial()
             } catch (e: NumberFormatException) {
-                e.printStackTrace()
                 println("Formato inválido, para escolher o item, você deve informar o número dele")
             }
 
         } while (dec !in 1..4)
 
-            menuInicial()
+        menuInicial()
     }
 
 }
